@@ -10,7 +10,7 @@ services:
       - app
 
   app:
-    image: php:8.1-fpm
+    build: ./php
     container_name: app
     links:
       - mysql
@@ -26,6 +26,7 @@ services:
       - "MYSQL_ROOT_PASSWORD=root"
     ports:
       - "3306:3306"
-
+    volumes:
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
 volumes:
   mysql:
